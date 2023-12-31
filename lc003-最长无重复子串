@@ -1,0 +1,26 @@
+int lengthOfLongestSubstring(char* s) {
+    //哈希，每次遍历用一个表存当前已经访问过的元素
+    int len =strlen(s);//s的长度
+    int length=1;//子串长度
+    int p1 = 0;
+    int p2 = 0;
+    if(len ==0)return 0;
+    while(p1<len){
+        int hash[256] = {0};
+        while(p2<len){
+            if(hash[s[p2]]==0)hash[s[p2]]++;//标记该元素已经存在
+            else{
+            break;   
+            }
+            p2++;
+        }
+        int new_len = p2-p1;
+        if(new_len>length){
+            length = new_len;
+        }
+        p1++;
+        p2=p1;
+
+    }
+    return length;
+}
