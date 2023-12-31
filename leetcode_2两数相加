@@ -1,0 +1,74 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* l3 = NULL;//定义输出链表
+    struct ListNode* p = NULL;//定义指针p
+    int c = 0;//进位标志
+
+    while (l1 != NULL || l2 != NULL) {//如果这俩链表都非空或者c标志不为0
+        //int x = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + c;
+        struct ListNode* newnode = malloc(sizeof(struct ListNode));
+        if(l1!=NULL && l2!=NULL){
+            int x = l1->val + l2->val+c;//计算当前位的之和
+            c = x/10;//进位
+            newnode->val = x%10;//计算新节点值
+            newnode->next = NULL;//初始化next指针
+            if (l3 == NULL) {
+                l3 = newnode;
+                p = l3;
+            }
+            else {
+                p->next = newnode;
+                p = p->next;
+            }
+        }
+        else if(l1==NULL && l2!=NULL) {
+            int x = l2->val+c;//计算当前位的之和
+            c = x/10;//进位
+            newnode->val = x%10;//计算新节点值
+            newnode->next = NULL;//初始化next指针
+            if (l3 == NULL) {
+                l3 = newnode;
+                p = l3;
+            }
+            else {
+                p->next = newnode;
+                p = p->next;
+            }
+        }
+        else if(l2==NULL && l1!=NULL){
+            int x = l1->val+c;//计算当前位的之和
+            c = x/10;//进位
+            newnode->val = x%10;//计算新节点值
+            newnode->next = NULL;//初始化next指针
+            if (l3 == NULL) {
+                l3 = newnode;
+                p = l3;
+            }
+            else {
+                p->next = newnode;
+                p = p->next;
+            }
+        }
+        
+        if(l1)l1 = l1->next;
+        if(l2)l2 = l2->next;
+
+    }
+    //最后处理进位
+        if(l1==NULL && l2==NULL && c==1){
+        //比初始都长产生进位
+            struct ListNode* newnode = malloc(sizeof(struct ListNode));
+            newnode->val = 1;
+            newnode->next = NULL;
+            p->next = newnode;
+            p = p->next;
+        }
+
+    return l3;
+}
