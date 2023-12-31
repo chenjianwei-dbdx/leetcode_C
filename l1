@@ -1,0 +1,27 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+//逐个遍历匹配
+    int* ret = malloc(sizeof(int)*2);
+    int i=0;
+    int j=1;
+    int sum=0;
+    while(i<numsSize){
+        sum = nums[i] + nums[j];
+        if(sum == target){
+            ret[0] = i;
+            ret[1] = j;
+            *returnSize=2;
+            return ret;
+        }
+        j++;
+        if(j>=numsSize){
+            i++;
+            j = i+1;
+        }
+
+    }
+    returnSize = 0;
+    return NULL;
+}
