@@ -1,0 +1,23 @@
+char* longestCommonPrefix(char** strs, int strsSize) {
+    int len = strlen(strs[0]);
+    if(strsSize==0 || len==0)return "";//空字符串返回
+    if(strsSize==1)return strs[0];//单个返回自己
+    int p=0;
+    int tag=0;
+    while(tag==0){//一般情况
+        for(int i=0;i<strsSize-1;i++){
+            if(strs[i][p]=='\0' || strs[i+1][p]=='\0' || strs[i][p]!=strs[i+1][p]){
+                tag=1;
+                break;
+            }
+        }
+        p++;
+    }
+    char* ret = malloc(sizeof(char)*p);//创建存储最长公共前缀的
+    for(int i=0;i<p-1;i++){
+        ret[i]=strs[0][i];
+    }
+    ret[p-1] = '\0';
+    return ret;
+}
+/*知识点：字符串还要留一位给\0结束字符，注意特殊临界情况单独领出来
