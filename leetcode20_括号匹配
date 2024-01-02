@@ -1,0 +1,25 @@
+bool isValid(char* s) {
+    //用栈
+    int len = strlen(s);//字符串长度
+    char* list = malloc(sizeof(char)*len);
+    int p=-1;
+    for(int i=0;i<len;i++){
+        if(p==-1){
+            p++;
+            list[p] = s[i];
+        }
+        else{
+            if(list[p]=='(' && s[i]==')')p--;
+            else if(list[p]=='[' && s[i]==']')p--;
+            else if(list[p]=='{' && s[i]=='}')p--;//匹配则出栈
+            else{
+                //入栈
+                p++;
+                list[p]=s[i];
+            }
+        }
+
+    }
+    if(p==-1)return true;
+    else return false;
+}
