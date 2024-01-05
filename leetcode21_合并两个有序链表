@@ -1,0 +1,71 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+    //新建一个返回的链表list3
+    struct ListNode* list3= NULL;
+    //list3->val =-101;
+    //list3->next=NULL;
+    struct ListNode* p = NULL;
+    //struct ListNode*p1 = list1;
+    //   struct ListNode*p2 = list2;
+    while(list1 && list2){
+        struct ListNode* newnode =malloc(sizeof(struct ListNode));
+        if(list1->val < list2->val){
+            newnode->val = list1->val;
+            newnode->next=NULL;
+            list1 = list1->next;//p1移动
+        }
+        else{
+            newnode->val = list2->val;
+            newnode->next = NULL;
+            list2 = list2->next;
+        }
+        if(list3==NULL){
+            list3 = newnode;
+            p = list3;
+        }
+        else{
+            p->next = newnode;
+            p = p->next;
+        }
+    }
+    //最后处理
+    if(list1!=NULL){
+        while(list1!=NULL){
+            struct ListNode* newnode = malloc(sizeof(struct ListNode));
+            newnode->val = list1->val;
+            newnode->next = NULL;
+            list1= list1->next;
+            if(list3 ==NULL){
+                list3 = newnode;
+                p = list3;
+            }
+            else{
+                p->next = newnode;
+                p = p->next;
+            }
+        }
+    }
+    else if(list2!=NULL){
+        while(list2!=NULL){
+            struct ListNode* newnode = malloc(sizeof(struct ListNode));
+            newnode->val = list2->val;
+            newnode->next = NULL;
+            list2= list2->next;
+            if(list3 ==NULL){
+                list3 = newnode;
+                p = list3;
+            }
+            else{
+                p->next = newnode;
+                p = p->next;
+            }
+        }
+    }
+    return list3;
+}
