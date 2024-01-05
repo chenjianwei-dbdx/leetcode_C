@@ -1,0 +1,33 @@
+int maxArea(int* height, int heightSize) {
+    //volumn is min(h1,h2)*i
+    //用一个数组存不同高度按序位置
+    /*int maxarea = 0;
+    for(int i =0;i<heightSize;i++){
+        for(int j=i;j<heightSize;j++){
+            //逐个计算
+            int min=0;
+            if(height[i]>height[j])min = height[j];
+            else min = height[i];
+            //min函数实现
+            int area = (j-i)*min;//计算面积
+            if(area>maxarea)maxarea = area;//更新最大值
+        }
+    }
+    return maxarea;*/
+    //以上为暴力解
+    int d = heightSize;//初始底长度
+    int p1 = 0;
+    int p2 = heightSize-1;
+    int maxarea = 0;
+    while(p1<p2){
+        int min=0;//最小高
+        if(height[p1]>height[p2])min = height[p2];
+        else min = height[p1];
+        int area = min *(p2-p1);
+        if(area > maxarea)maxarea  =area;//更新
+        if(height[p1]>height[p2])p2--;
+        else p1++;//移动小的
+
+    }
+    return maxarea;
+}
