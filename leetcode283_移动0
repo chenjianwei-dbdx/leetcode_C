@@ -1,0 +1,21 @@
+void moveZeroes(int* nums, int numsSize) {
+    //原地操作
+    //把非0往前填充，剩下的全为0就行了
+    int p1 = 0;
+    int p2 = 0;
+
+    if(numsSize !=0){
+        while(p2<numsSize){
+            if(nums[p2] != 0){
+                nums[p1] = nums[p2];
+                p1++;//待替换位置
+            }
+            p2++;//向后遍历
+        }
+        //处理后面0
+        while(p1<numsSize){
+            nums[p1]=0;
+            p1++;
+        }
+    }
+}
